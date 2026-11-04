@@ -1,0 +1,70 @@
+import 'package:atomic_x_core/atomicxcore.dart';
+import 'package:flutter/material.dart';
+import 'package:tencent_calls_uikit/src/view/callview/public/float/call_float_widget.dart';
+import 'package:tencent_calls_uikit/src/view/callview/public/multi/call_grid_widget.dart';
+import 'package:tencent_calls_uikit/src/view/callview/public/pip/call_pip_widget.dart';
+
+class CallView extends StatefulWidget {
+  final bool isPipMode;
+  final bool enableAITranscriber;
+
+  const CallView({
+    super.key,
+    this.enableAITranscriber = false,
+    this.isPipMode = false,
+  });
+
+  @override
+  State<CallView> createState() => _CallViewState();
+}
+
+class _CallViewState extends State<CallView> {
+  late final CallCoreController controller;
+
+  @override
+  void initState() {
+    controller = CallCoreController.create();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: ValueListenableBuilder(
+            valueListenable: CallStore.shared.state.activeCall,
+            builder: (context, activeCall, child) {
+              if (widget.isPipMode) {
+                controller.setLayoutTemplate(CallLayoutTemplate.pip);
+                return CallPipWidget(
+                  controller: controller,
+                );
+              }
+
+              if (activeCall.chatGroupId.isNotEmpty || activeCall.inviteeIds.length > 1) {
+                controller.setLayoutTemplate(CallLayoutTemplate.grid);
+                return CallGridWidget(
+                  controller: controller,
+                  enableAITranscriber: widget.enableAITranscriber,
+                );
+              }
+
+              controller.setLayoutTemplate(CallLayoutTemplate.float);
+              return CallFloatWidget(
+                controller: controller,
+                enableAITranscriber: widget.enableAITranscriber,
+              );
+            }
+        ),
+      ),
+    );
+  }
+}
