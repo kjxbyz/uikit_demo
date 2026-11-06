@@ -1,4 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- tencent_chat_uikit 原生代码所需权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
     <application
         android:label="uikit_demo"
         android:name="${applicationName}"
@@ -25,6 +34,27 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!-- tencent_chat_uikit 原生页面（源码已迁移至 android/app/src/main/kotlin/com/tencent/...） -->
+        <activity
+            android:name="com.tencent.cloud.tuikit.flutter.tuichatkit.videorecorder.view.VideoRecorderBridgeActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.tencent.cloud.tuikit.flutter.tuichatkit.videorecorder.view.VideoRecorderActivity"
+            android:exported="true"
+            android:theme="@style/BaseComponent.Theme.FullScreen" />
+        <activity
+            android:name="com.tencent.cloud.tuikit.flutter.tuichatkit.filepicker.impl.FilePickerBridgeActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.tencent.cloud.tuikit.flutter.tuichatkit.videoplayer.impl.VideoPlayerActivity"
+            android:exported="true"
+            android:theme="@style/BaseComponent.Theme.FullScreen" />
+
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "tencent_cloud_chat_push",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

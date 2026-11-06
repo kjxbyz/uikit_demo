@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "professional_swiftpm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Tencent-RTC/Professional_SwiftPM.git",
+      "state" : {
+        "revision" : "795b39d268647c159864368622e782bd2f66d867",
+        "version" : "13.6.21648"
+      }
+    },
+    {
+      "identity" : "txcustombeautyprocesserplugin_swiftpm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Tencent-RTC/TXCustomBeautyProcesserPlugin_SwiftPM.git",
+      "state" : {
+        "revision" : "d25fc4fe67c393f1ad9fe219a8f644631670225e",
+        "version" : "1.0.2"
+      }
+    }
+  ],
+  "version" : 2
+}

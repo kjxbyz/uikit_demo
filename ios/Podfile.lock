@@ -1,0 +1,112 @@
+PODS:
+  - AlbumPicker (1.0.8):
+    - AlbumPickerCore (= 1.0.8)
+  - AlbumPickerCore (1.0.8):
+    - TXIMSDK_Plus_iOS_XCFramework
+  - atomic_x_core (5.3.0):
+    - AtomicXCore (~> 5.3.0)
+    - Flutter
+  - AtomicXCore (5.3.0):
+    - TXIMSDK_Plus_iOS_XCFramework
+    - TXLiteAVSDK_Professional (>= 13.5.21355)
+  - Flutter (1.0.0)
+  - HydraAsync (2.0.6)
+  - Masonry (1.1.0)
+  - RTCRoomEngine/Professional (4.3.11):
+    - TXIMSDK_Plus_iOS_XCFramework (>= 8.4.6676)
+    - TXLiteAVSDK_Professional (>= 12.8.0.19666)
+  - SDWebImage (5.21.7):
+    - SDWebImage/Core (= 5.21.7)
+  - SDWebImage/Core (5.21.7)
+  - tencent_calls_uikit (0.0.1):
+    - Flutter
+    - RTCRoomEngine/Professional
+    - TUICore
+  - tencent_chat_uikit (1.0.0):
+    - AlbumPickerCore (~> 1.0)
+    - Flutter
+    - Masonry
+    - tuikit_atomic_x
+  - tencent_cloud_chat_sdk (8.0.0):
+    - Flutter
+    - HydraAsync
+    - TXIMSDK_Plus_iOS_XCFramework (~> 9.1.7822)
+  - tencent_cloud_uikit_core (0.0.1):
+    - Flutter
+  - TUICore (9.0.7660):
+    - SDWebImage
+    - TUICore/ImSDK_Plus (= 9.0.7660)
+  - TUICore/Base (9.0.7660):
+    - SDWebImage
+  - TUICore/ImSDK_Plus (9.0.7660):
+    - SDWebImage
+    - TUICore/Base
+    - TXIMSDK_Plus_iOS_XCFramework
+  - tuikit_atomic_x (0.0.1):
+    - AlbumPicker (~> 1.0)
+    - Flutter
+  - TXIMSDK_Plus_iOS_XCFramework (9.1.7824)
+  - TXLiteAVSDK_Professional (13.6.21648):
+    - TXLiteAVSDK_Professional/Professional (= 13.6.21648)
+  - TXLiteAVSDK_Professional/Professional (13.6.21648)
+
+DEPENDENCIES:
+  - atomic_x_core (from `.symlinks/plugins/atomic_x_core/ios`)
+  - Flutter (from `Flutter`)
+  - tencent_calls_uikit (from `.symlinks/plugins/tencent_calls_uikit/ios`)
+  - tencent_chat_uikit (from `./TUIKitChatNative`)
+  - tencent_cloud_chat_sdk (from `.symlinks/plugins/tencent_cloud_chat_sdk/ios`)
+  - tencent_cloud_uikit_core (from `.symlinks/plugins/tencent_cloud_uikit_core/ios`)
+  - tuikit_atomic_x (from `.symlinks/plugins/tuikit_atomic_x/ios`)
+
+SPEC REPOS:
+  trunk:
+    - AlbumPicker
+    - AlbumPickerCore
+    - AtomicXCore
+    - HydraAsync
+    - Masonry
+    - RTCRoomEngine
+    - SDWebImage
+    - TUICore
+    - TXIMSDK_Plus_iOS_XCFramework
+    - TXLiteAVSDK_Professional
+
+EXTERNAL SOURCES:
+  atomic_x_core:
+    :path: ".symlinks/plugins/atomic_x_core/ios"
+  Flutter:
+    :path: Flutter
+  tencent_calls_uikit:
+    :path: ".symlinks/plugins/tencent_calls_uikit/ios"
+  tencent_chat_uikit:
+    :path: "./TUIKitChatNative"
+  tencent_cloud_chat_sdk:
+    :path: ".symlinks/plugins/tencent_cloud_chat_sdk/ios"
+  tencent_cloud_uikit_core:
+    :path: ".symlinks/plugins/tencent_cloud_uikit_core/ios"
+  tuikit_atomic_x:
+    :path: ".symlinks/plugins/tuikit_atomic_x/ios"
+
+SPEC CHECKSUMS:
+  AlbumPicker: 812fc5e6aeba0c0877bbc125e030ca1efbfdf109
+  AlbumPickerCore: 6b2819051b1b30e0764c271924f22181226cec14
+  atomic_x_core: 3869d91cb997c2ec8e965be77c624f929d5f6691
+  AtomicXCore: 354a890e7694672ccc6aebd8896ea8a5c6c63e7f
+  Flutter: 71a624a5bc0c04062bf19101d501e466baf2fb47
+  HydraAsync: 8d589bd725b0224f899afafc9a396327405f8063
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  RTCRoomEngine: 27728def998534f35d48dfa59bac60e74219ea3c
+  SDWebImage: e9fc87c1aab89a8ab1bbd74eba378c6f53be8abf
+  tencent_calls_uikit: 6801c8e74a59502e6433c654192a89c2bfc83340
+  tencent_chat_uikit: 9dc7596c047ceea8dbf57f9ed29d7356d5670995
+  tencent_cloud_chat_sdk: 103ae90a2c6ca13fc99f25d87eea064e72f03395
+  tencent_cloud_uikit_core: 137e8ae40882b1929508e688182b2818708cc078
+  TUICore: f23efd42114613206437cfd1cd6934c30d232d3f
+  tuikit_atomic_x: 795c34b2e2bfe50dd3cb62ecde63c0d44e6aa999
+  TXIMSDK_Plus_iOS_XCFramework: 4f615c07f10b76d7ff236bc4c241685f7a0cb16c
+  TXLiteAVSDK_Professional: 86ee81dfad0bd9c72079e8ad0e33f18b54721ec0
+
+PODFILE CHECKSUM: 418f1bcd39093c9c217302dd6d86e3d96b511731
+
+COCOAPODS: 1.17.0

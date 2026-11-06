@@ -31,6 +31,10 @@ target 'Runner' do
   use_frameworks!
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+
+  # tencent_chat_uikit 原生代码本地组件（原 Flutter 插件 iOS 侧代码迁入 ios/TUIKitChatNative）
+  pod 'tencent_chat_uikit', :path => './TUIKitChatNative'
+
   target 'RunnerTests' do
     inherit! :search_paths
   end
@@ -40,4 +44,69 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
   end
+end
+
+# ---------------------------------------------------------------------------
+# LiteAV 系列 framework 去重
+#
+# 本工程同时存在两种 LiteAV 引入方式：
+#   SwiftPM  : tencent_rtc_sdk / super_player 的 Package.swift 依赖
+#              Tencent-RTC/Professional_SwiftPM（binaryTarget），Xcode 会把
+#              TXLiteAVSDK_Professional / TXSoundTouch / TXFFmpeg 自动嵌入
+#              Runner.app/Frameworks。
+#   CocoaPods: AtomicXCore、RTCRoomEngine/Professional 依赖
+#              TXLiteAVSDK_Professional pod，"[CP] Embed Pods Frameworks"
+#              又要往同一路径嵌入同一批 framework。
+#
+# 两者产物同名同版本，Xcode 判定为 "Multiple commands produce ..." 而构建失败。
+# 处理方式：保留 SwiftPM 的嵌入，让 CocoaPods 跳过这 3 个 framework 的重复嵌入
+# （链接阶段仍用 Pods 内的副本，运行时从 Runner.app/Frameworks 加载）。
+#
+# 仅当工程确实启用了 Flutter 的 SwiftPM 集成时才生效，避免将来关闭 SwiftPM 后
+# 出现 framework 没人嵌入的问题。逻辑幂等，每次 pod install 自动重新应用。
+# ---------------------------------------------------------------------------
+LITEA_V_DEDUP_FRAMEWORKS = %w[
+  TXLiteAVSDK_Professional
+  TXSoundTouch
+  TXFFmpeg
+].freeze
+
+post_integrate do |installer|
+  ios_dir = File.dirname(File.realpath(__FILE__))
+  pbxproj = File.join(ios_dir, 'Runner.xcodeproj', 'project.pbxproj')
+  spm_in_use = File.exist?(pbxproj) && File.read(pbxproj).include?('FlutterGeneratedPluginSwiftPackage')
+
+  unless spm_in_use
+    puts '[liteav-dedup] 未检测到 Flutter SwiftPM 集成，跳过去重'
+    next
+  end
+
+  framework_names = LITEA_V_DEDUP_FRAMEWORKS.join('|')
+  support_root = File.join(installer.sandbox.root, 'Target Support Files')
+
+  Dir.glob(File.join(support_root, 'Pods-*')).each do |support_dir|
+    base = File.basename(support_dir)
+
+    # 1) [CP] Embed Pods Frameworks 脚本：去掉重复的嵌入命令
+    script = File.join(support_dir, "#{base}-frameworks.sh")
+    if File.exist?(script)
+      patched = File.readlines(script).map do |line|
+        if line =~ /^\s*install_framework .*\/(#{framework_names})\.framework"\s*$/
+          "  # [liteav-dedup] SwiftPM 已嵌入，跳过重复嵌入: #{line.strip}\n"
+        else
+          line
+        end
+      end.join
+      File.write(script, patched)
+    end
+
+    # 2) 同步移除脚本声明的输出，否则 Xcode 仍认为这里会产出同名 framework
+    pattern = File.join(support_dir, "#{base}-frameworks-*-output-files.xcfilelist")
+    Dir.glob(pattern).each do |list|
+      kept = File.readlines(list).reject { |line| line =~ /\/(#{framework_names})\.framework\s*$/ }
+      File.write(list, kept.join)
+    end
+  end
+
+  puts "[liteav-dedup] 已让 CocoaPods 跳过 #{LITEA_V_DEDUP_FRAMEWORKS.join(', ')} 的重复嵌入（由 SwiftPM 提供）"
 end

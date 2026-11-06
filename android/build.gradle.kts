@@ -20,7 +20,8 @@ subprojects {
 }
 
 // 1. 定义你需要操作的指定模块路径列表（例如 ":feature:login", ":core:base" 等）
-val targetModules = setOf(":tencent_rtc_sdk", ":tuikit_atomic_x", ":tencent_calls_uikit", ":tencent_chat_uikit")
+// 注：tencent_chat_uikit 原生代码已迁入 :app 模块，不再是 Flutter 插件子工程
+val targetModules = setOf(":tencent_rtc_sdk", ":tuikit_atomic_x", ":tencent_calls_uikit", ":tencent_cloud_chat_push")
 
 subprojects {
     val subproject = this

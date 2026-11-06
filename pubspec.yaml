@@ -34,10 +34,28 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
-  tencent_chat_uikit:
-    path: plugins/TUIKit_Flutter/chat/uikit
+
+  # ---- tencent_chat_uikit (源码已迁移到 lib/tencent_chat_uikit，不再以插件方式引入) ----
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  characters: ^1.3.0
+  # Pinned, not ranged: 1.0.8+ needs markdown ^7.3.1, which needs Dart 3.9.
+  flutter_markdown_plus: 1.0.7
+  markdown: 7.3.0
+  path_provider: ^2.1.4
+  provider: ^6.0.5
+  cached_network_image: ^4.0.6
+  flutter_svg: ^2.0.10+1
+  url_launcher: ^6.3.1
+  shared_preferences: ^2.5.0
+  http: ^1.2.0
   tencent_calls_uikit:
     path: plugins/TUIKit_Flutter/call
+
+  # ---- TUIKit_Flutter chat demo 示例代码所需依赖（示例已迁入 lib/） ----
+  crypto: ^3.0.2
+  archive: ^3.6.1
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +68,17 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
 
+dependency_overrides:
+  tencent_cloud_chat_sdk: any
+  rtc_room_engine: 4.2.0
+  rtc_room_engine_impl: 4.2.0
+  tuikit_atomic_x:
+    path: plugins/TUIKit_Flutter/atomic-x
+  # 官方包的 android/build.gradle 使用已被 Gradle 9 移除的 jcenter()，
+  # 拷贝到 plugins/ 修正仓库配置后以 path 引入
+  tencent_cloud_chat_push:
+    path: plugins/TUIKit_Flutter/push
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -60,6 +89,16 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  # tencent_chat_uikit 源码内迁后，其资源与 l10n 一并交给主工程管理
+  generate: true
+
+  assets:
+    - chat_assets/emoji/
+    - chat_assets/icon/
+    - chat_assets/icon/aiassistant/
+    - assets/
+    - assets/tab/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

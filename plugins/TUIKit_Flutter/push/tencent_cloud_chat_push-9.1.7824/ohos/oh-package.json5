@@ -1,0 +1,12 @@
+{
+  "name": "tencent_cloud_chat_push",
+  "version": "1.0.0",
+  "description": "Notification push for Tencent Cloud Chat on HarmonyOS.",
+  "main": "index.ets",
+  "author": "TencentCloud",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@tencentcloud/timpush": "^8.7.7203",
+    "@tencentcloud/imsdk": "^9.0.7662"
+  }
+}
